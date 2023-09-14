@@ -101,6 +101,27 @@ public class UserController {
 			
 			insertQuery.close();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public boolean Login(String user, String pass){
+		try (DBConnection connection = new DBConnection()){
+			String encryptedPass = DigestUtils.md5Hex(pass);
+			Connection cnn = connection.Connect();
+			PreparedStatement query = cnn.prepareStatement("SELECT id FROM usuarios WHERE usuario = ? AND pass = ?");
+			query.setString(1, user);
+			query.setString(2, encryptedPass);
+			ResultSet rs = query.executeQuery();
+			
+			if (rs.next())
+				return  true;
+			else
+				return false;
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
 		}
 	}
 }

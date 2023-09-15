@@ -1,4 +1,5 @@
 
+import Vews.Login;
 import Vews.ProductView;
 import Vews.UsersView;
 
@@ -7,7 +8,7 @@ public class config {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new UsersView().setVisible(true);
+				new Login().setVisible(true);
 			}
 		});
 	}

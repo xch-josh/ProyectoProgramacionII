@@ -1,5 +1,7 @@
 package Controllers;
 
+import CustomExceptions.InvalidPassException;
+import CustomExceptions.UnexistUserException;
 import Models.DBConnection;
 import Models.UserModels.UserAddModel;
 import Models.UserModels.UserEditModel;
@@ -10,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class UserController {
@@ -105,22 +108,24 @@ public class UserController {
 		}
 	}
 	
-	public boolean Login(String user, String pass){
+	public boolean Login(String user, String pass)  {
 		try (DBConnection connection = new DBConnection()){
 			String encryptedPass = DigestUtils.md5Hex(pass);
 			Connection cnn = connection.Connect();
-			PreparedStatement query = cnn.prepareStatement("SELECT id FROM usuarios WHERE usuario = ? AND pass = ?");
+			PreparedStatement query = cnn.prepareStatement("SELECT pass FROM usuarios WHERE usuario = ?");
 			query.setString(1, user);
-			query.setString(2, encryptedPass);
 			ResultSet rs = query.executeQuery();
 			
 			if (rs.next())
-				return  true;
+				if (rs.getString("pass").equals(encryptedPass))
+					return  true;
+				else
+					throw  new InvalidPassException("Contraseña incorrecta");
 			else
-				return false;
+				throw new UnexistUserException("El usuario no existe");
 		}
 		catch(Exception e){
-			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage());
 			return false;
 		}
 	}

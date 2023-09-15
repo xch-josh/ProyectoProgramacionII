@@ -6,6 +6,8 @@ import Models.UserModels.UserViewModel;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +21,15 @@ public class UsersView extends javax.swing.JFrame {
 	
 	public UsersView() {
 		initComponents();
+		
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				PrincipalForm principalForm = new PrincipalForm();
+				principalForm.setVisible(true);
+			}
+		});
+		
 		this.setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		ShowData();
@@ -219,7 +230,11 @@ public class UsersView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+	
+	private void CloseForm(){
+		
+	}
+	
 	public void ShowData(){
 		UserController user = new UserController();
 		

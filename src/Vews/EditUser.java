@@ -1,18 +1,24 @@
 package Vews;
 
 import Controllers.UserController;
-import Models.UserModels.UserAddModel;
+import Models.UserModels.UserEditModel;
+import Models.UserModels.UserViewModel;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class AddUser extends javax.swing.JFrame {
+public class EditUser extends javax.swing.JFrame {
+	private int idUser;
 	public UsersView usersView;
 	
-	public AddUser() {
+	public EditUser(UserViewModel model) {
 		initComponents();
+		
 		this.setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		txtUser.setText(model.GetUser());
+		this.idUser = model.GetId();
 	}
 
     @SuppressWarnings("unchecked")
@@ -30,6 +36,7 @@ public class AddUser extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,7 +44,7 @@ public class AddUser extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("INGRESAR USUARIO");
+        jLabel1.setText("EDITAR USUARIO");
 
         txtUser.setBackground(new java.awt.Color(255, 255, 255));
         txtUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -51,10 +58,10 @@ public class AddUser extends javax.swing.JFrame {
         txtPass.setName("txtName"); // NOI18N
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("*Contraseña: ");
+        jLabel4.setText("Contraseña: ");
 
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("*Confirmar contraseña:");
+        jLabel5.setText("Confirmar contraseña:");
 
         txtConfirmPass.setBackground(new java.awt.Color(255, 255, 255));
         txtConfirmPass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -74,7 +81,7 @@ public class AddUser extends javax.swing.JFrame {
 
         btnSave.setBackground(new java.awt.Color(0, 204, 0));
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
-        btnSave.setText("Agregar"); // NOI18N
+        btnSave.setText("Guardar"); // NOI18N
         btnSave.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnSave.setName("btnDelete"); // NOI18N
         btnSave.setPreferredSize(new Dimension(110,40));
@@ -88,6 +95,10 @@ public class AddUser extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(204, 0, 0));
         jLabel8.setText("Los campos con (*) son obligatorios");
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel9.setText("Si no desea editar la contraseña dejar vacio los campos");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,24 +108,25 @@ public class AddUser extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtUser))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(40, 40, 40)
+                                .addComponent(txtConfirmPass))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(104, 104, 104)
                                 .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(40, 40, 40)
-                                .addComponent(txtConfirmPass)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 17, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel8))
-                        .addContainerGap(143, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,7 +143,9 @@ public class AddUser extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -140,7 +154,7 @@ public class AddUser extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,7 +166,7 @@ public class AddUser extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,33 +181,37 @@ public class AddUser extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-		if (txtUser.getText().trim().length() != 0 && txtPass.getText().trim().length() != 0 && txtConfirmPass.getText().trim().length() != 0) {
-			if (txtPass.getText().trim().equals(txtConfirmPass.getText().trim())){
-				try {
-					UserController userController = new UserController();
-					UserAddModel model = new UserAddModel();
+        if (txtUser.getText().trim().length() != 0) {
+            if (txtPass.getText().trim().equals(txtConfirmPass.getText().trim())){
+                try {
+                    UserController userController = new UserController();
+                    UserEditModel model = new UserEditModel();
 
-					model.SetUser(txtUser.getText().trim());
-					model.SetPass(txtPass.getText().trim());
+                    model.SetUser(txtUser.getText().trim());
+		model.SetId(this.idUser);
 					
-					if (userController.Insert(model)){
-						JOptionPane.showMessageDialog(null, "Se ha ingresado el usuario correctamente");
-						usersView.ShowData();
-						this.dispose();
-				}
-				} catch (Exception ex) {
-					System.out.println(ex.getMessage());
-				}
-			}
-			else{
-				JOptionPane.showMessageDialog(null, "Las contraseñas no coinsiden");
-			}
-		}
+		if (txtPass.getText().trim().length() > 0)
+			model.SetPass(txtPass.getText().trim());
 		else
-		JOptionPane.showMessageDialog(null, "Debe llenar los campos con (*)");
+			model.SetPass(null);
+
+                    if (userController.Update(model)){
+                        JOptionPane.showMessageDialog(null, "Se ha editado el usuario correctamente");
+                        usersView.ShowData();
+                        this.dispose();
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Las contraseñas no coinsiden");
+            }
+        }
+        else
+        JOptionPane.showMessageDialog(null, "Debe llenar los campos con (*)");
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
@@ -202,6 +220,7 @@ public class AddUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtConfirmPass;
     private javax.swing.JTextField txtPass;

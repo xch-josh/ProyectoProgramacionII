@@ -41,7 +41,7 @@ public class UserController {
 			PreparedStatement insertQuery = null;
 			String ecryptedPass = DigestUtils.md5Hex(model.GetPass());
 			
-			insertQuery = connection.Connect().prepareStatement("INSERT INTO usuarios VALUES (?, ?)");
+			insertQuery = connection.Connect().prepareStatement("INSERT INTO usuarios (usuario, pass) VALUES (?, ?)");
 			
 			insertQuery.setString(1, model.GetUser());
 			insertQuery.setString(2, ecryptedPass);

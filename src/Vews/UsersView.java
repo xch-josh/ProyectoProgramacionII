@@ -1,6 +1,7 @@
 package Vews;
 
 import Controllers.UserController;
+import Models.UserModels.UserEditModel;
 import Models.UserModels.UserViewModel;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
@@ -8,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javafx.scene.shape.MeshView;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -19,6 +21,7 @@ public class UsersView extends javax.swing.JFrame {
 		initComponents();
 		this.setLocationRelativeTo(this);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		ShowData();
 	}
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -229,7 +232,7 @@ public class UsersView extends javax.swing.JFrame {
 		List<UserViewModel> newLst = new ArrayList<UserViewModel>();
 		DefaultTableModel tableModel = (DefaultTableModel) tProducts.getModel();
 		
-		newLst = lst.stream().filter(x -> x.GetUser().toUpperCase().contains(txtNameOrCode.getText())).collect(Collectors.toList());
+		newLst = lst.stream().filter(x -> x.GetUser().toUpperCase().contains(txtNameOrCode.getText().toUpperCase())).collect(Collectors.toList());
 		tableModel.setRowCount(0);
 		
 		if (!newLst.isEmpty()){	
@@ -263,13 +266,21 @@ public class UsersView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-			if (tProducts.getSelectedRow() >= 0){
-				try {
+	if (tProducts.getSelectedRow() >= 0){
+		try {
+			UserViewModel model = new UserViewModel();
 
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-				}
-			}
+			model.SetId(Integer.parseInt(tProducts.getModel().getValueAt(tProducts.getSelectedRow(), 0).toString()));
+			model.SetUser(tProducts.getModel().getValueAt(tProducts.getSelectedRow(), 1).toString());
+			
+			EditUser edit = new EditUser(model);
+			edit.usersView = this;
+			edit.setVisible(true);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void txtNameOrCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameOrCodeKeyTyped

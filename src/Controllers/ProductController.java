@@ -1,5 +1,6 @@
 package Controllers;
 
+import CustomExceptions.InsufficientStokException;
 import Models.DBConnection;
 import Models.ProductModels.ProductAddModel;
 import Models.ProductModels.ProductEditModel;
@@ -11,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.SimpleDateFormat;
+import javax.naming.InsufficientResourcesException;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -120,17 +122,53 @@ public class ProductController {
 		}
 	}
 	
-	public void ExportToPDF(String ruta, String archi) {
-			try(Connection cnn = new DBConnection().Connect()) {
-				String rutaInforme = ruta;
-				JasperPrint informe = JasperFillManager.fillReport(rutaInforme, null, cnn);
-				JasperExportManager.exportReportToPdfFile(informe, archi);
+	public void ExportToPDF(String root, String archi) {
+		try(Connection cnn = new DBConnection().Connect()) {
+			String rutaInforme = root;
+			JasperPrint informe = JasperFillManager.fillReport(rutaInforme, null, cnn);
+			JasperExportManager.exportReportToPdfFile(informe, archi);
 
-				JasperViewer ventanavisor = new JasperViewer(informe, false);
-				ventanavisor.setTitle("INFORME");
-				ventanavisor.setVisible(false);
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "ERROR AL EXPORTAR DOCUMENTO");
+			JasperViewer ventanavisor = new JasperViewer(informe, false);
+			ventanavisor.setTitle("INFORME");
+			ventanavisor.setVisible(false);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "ERROR AL EXPORTAR DOCUMENTO");
+		}
+	}
+	
+	public boolean Out(String code, int quantity){
+		try(Connection cnn = new DBConnection().Connect()){
+			PreparedStatement query = cnn.prepareStatement("SELECT cantidadProducto FROM producto WHERE codigoProducto = ?");
+			query.setString(1, code);
+			
+			ResultSet rs = query.executeQuery();
+			
+			if (rs.next()){
+				if (rs.getInt("cantidadProducto") >= quantity){
+					PreparedStatement subtractQuery = cnn.prepareStatement("UPDATE producto SET cantidadProducto = cantidadProducto - ? WHERE codigoProducto = ?");
+					subtractQuery.setInt(1, quantity);
+					subtractQuery.setString(2, code);
+					
+					int result = subtractQuery.executeUpdate();
+					
+					subtractQuery.close();
+					query.close();
+					
+					if (result > 0)
+						return true;
+					else
+						return false;
+				}
+				else
+					throw new InsufficientStokException("No hay suficientes existencias");
 			}
-    }
+			else{
+				return false;
+			}
+		}
+		catch (Exception e){
+			System.out.println(e.getMessage());
+			return  false;
+		}
+	}
 }

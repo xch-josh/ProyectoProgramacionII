@@ -117,12 +117,15 @@ public class UserController {
 			ResultSet rs = query.executeQuery();
 			
 			if (rs.next())
-				if (rs.getString("pass").equals(encryptedPass))
+				if (rs.getString("pass").equals(encryptedPass)){
+					query.close();
 					return  true;
+				}
 				else
 					throw  new InvalidPassException("Contraseña incorrecta");
 			else
 				throw new UnexistUserException("El usuario no existe");
+			
 		}
 		catch(Exception e){
 			JOptionPane.showMessageDialog(null, e.getMessage());

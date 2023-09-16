@@ -171,4 +171,36 @@ public class ProductController {
 			return  false;
 		}
 	}
+	
+	public boolean Input(String code, int quantity){
+		try(Connection cnn = new DBConnection().Connect()){
+			PreparedStatement query = cnn.prepareStatement("SELECT cantidadProducto FROM producto WHERE codigoProducto = ?");
+			query.setString(1, code);
+			
+			ResultSet rs = query.executeQuery();
+			
+			if (rs.next()){
+				PreparedStatement add = cnn.prepareStatement("UPDATE producto SET cantidadProducto = cantidadProducto + ? WHERE codigoProducto = ?");
+				add.setInt(1, quantity);
+				add.setString(2, code);
+					
+				int result = add.executeUpdate();
+					
+				add.close();
+				query.close();
+					
+				if (result > 0)
+					return true;
+				else
+					return false;
+			}
+			else{
+				return false;
+			}
+		}
+		catch (Exception e){
+			System.out.println(e.getMessage());
+			return  false;
+		}
+	}
 }

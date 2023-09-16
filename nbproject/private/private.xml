@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Vews/ProductView.java</file>
             <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Controllers/UserController.java</file>
-            <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Vews/UsersView.java</file>
-            <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Vews/EditUser.java</file>
-            <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Vews/AddProductView.java</file>
-            <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Vews/AddUser.java</file>
-            <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/config.java</file>
+            <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Controllers/ProductController.java</file>
+            <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Vews/SubtractProduct.java</file>
         </group>
     </open-files>
 </project-private>

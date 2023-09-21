@@ -203,7 +203,7 @@ public class ProductController {
 				insertToHistory.setInt(1, quantity);
 				insertToHistory.setString(2, code);
 				insertToHistory.setDate(3, sqlDate);
-				insertToHistory.setBoolean(4, false);
+				insertToHistory.setBoolean(4, true);
 				
 				int result = add.executeUpdate();
 				

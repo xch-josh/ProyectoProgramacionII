@@ -373,10 +373,10 @@ public class ProductView extends javax.swing.JFrame {
 
     private void btnInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputActionPerformed
         if (tProducts.getSelectedRow() >= 0){
-		SubtractProduct subtractProduct = new SubtractProduct(tProducts.getModel().getValueAt(tProducts.getSelectedRow(), 0).toString());
-		subtractProduct.productView = this;
-		subtractProduct.lblProduct.setText(tProducts.getModel().getValueAt(tProducts.getSelectedRow(), 1).toString());
-		subtractProduct.setVisible(true);
+		AddProduct addProduct = new AddProduct(tProducts.getModel().getValueAt(tProducts.getSelectedRow(), 0).toString());
+		addProduct.productView = this;
+		addProduct.lblProduct.setText(tProducts.getModel().getValueAt(tProducts.getSelectedRow(), 1).toString());
+		addProduct.setVisible(true);
 	}
     }//GEN-LAST:event_btnInputActionPerformed
 	

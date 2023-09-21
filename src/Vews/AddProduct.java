@@ -1,19 +1,22 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
 package Vews;
 
 import Controllers.ProductController;
-import Controllers.UserController;
 import javax.swing.JOptionPane;
 
-public class SubtractProduct extends javax.swing.JFrame {
-	ProductView productView;
-	private String code;
+public class AddProduct extends javax.swing.JFrame {
+	public ProductView productView;
+	String code;
 	
-    public SubtractProduct(String code) {
-	initComponents();
-	this.setLocationRelativeTo(this);
-	this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-	
-	this.code = code;
+    public AddProduct(String code) {
+        initComponents();
+		this.setLocationRelativeTo(this);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.code = code;
     }
 
     @SuppressWarnings("unchecked")
@@ -81,7 +84,7 @@ public class SubtractProduct extends javax.swing.JFrame {
                         .addComponent(lblProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 96, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -92,9 +95,9 @@ public class SubtractProduct extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(115, 115, 115))))))
+                                .addGap(127, 127, 127))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(103, 103, 103))
         );
@@ -135,17 +138,17 @@ public class SubtractProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-	if (txtQuantity.getText().trim().length() != 0) {
-		ProductController user = new ProductController();
+        if (txtQuantity.getText().trim().length() != 0) {
+            ProductController user = new ProductController();
 
-		if (user.Out(this.code, Integer.parseInt(txtQuantity.getText().trim()))){
-			JOptionPane.showMessageDialog(this, "Se ha registado la salida del producto");
-			this.productView.ShowData();
-			this.dispose();
-		}
-	}
-	else
-	JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
+            if (user.Input(this.code, Integer.parseInt(txtQuantity.getText().trim()))){
+                JOptionPane.showMessageDialog(this, "Se ha registrado la entrada del producto");
+                this.productView.ShowData();
+                this.dispose();
+            }
+        }
+        else
+        JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
     }//GEN-LAST:event_btnSaveActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

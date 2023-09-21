@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.naming.InsufficientResourcesException;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -146,10 +147,21 @@ public class ProductController {
 			if (rs.next()){
 				if (rs.getInt("cantidadProducto") >= quantity){
 					PreparedStatement subtractQuery = cnn.prepareStatement("UPDATE producto SET cantidadProducto = cantidadProducto - ? WHERE codigoProducto = ?");
+					PreparedStatement insertToHistory = cnn.prepareStatement("INSERT INTO historialentradassalidas (cantidad, codigoProducto, fecha, tipo) VALUES (?, ?, ?, ?)");
+					String dateFormated = new  SimpleDateFormat("yyyy-MM-dd").format(new Date().getTime());
+					java.sql.Date sqlDate = java.sql.Date.valueOf(dateFormated);
+					
 					subtractQuery.setInt(1, quantity);
 					subtractQuery.setString(2, code);
 					
+					insertToHistory.setInt(1, quantity);
+					insertToHistory.setString(2, code);
+					insertToHistory.setDate(3, sqlDate);
+					insertToHistory.setBoolean(4, false);
+					
 					int result = subtractQuery.executeUpdate();
+					insertToHistory.executeUpdate();
+					insertToHistory.close();
 					
 					subtractQuery.close();
 					query.close();
@@ -181,11 +193,22 @@ public class ProductController {
 			
 			if (rs.next()){
 				PreparedStatement add = cnn.prepareStatement("UPDATE producto SET cantidadProducto = cantidadProducto + ? WHERE codigoProducto = ?");
+				PreparedStatement insertToHistory = cnn.prepareStatement("INSERT INTO historialentradassalidas (cantidad, codigoProducto, fecha, tipo) VALUES (?, ?, ?, ?)");
+				String dateFormated = new  SimpleDateFormat("yyyy-MM-dd").format(new Date().getTime());
+				java.sql.Date sqlDate = java.sql.Date.valueOf(dateFormated);
+					
 				add.setInt(1, quantity);
 				add.setString(2, code);
-					
+				
+				insertToHistory.setInt(1, quantity);
+				insertToHistory.setString(2, code);
+				insertToHistory.setDate(3, sqlDate);
+				insertToHistory.setBoolean(4, false);
+				
 				int result = add.executeUpdate();
-					
+				
+				insertToHistory.executeUpdate();
+				insertToHistory.close();
 				add.close();
 				query.close();
 					

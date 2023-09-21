@@ -5,7 +5,10 @@
         <group>
             <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Vews/ProductView.java</file>
             <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Controllers/UserController.java</file>
+            <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Models/DBConnection.java</file>
             <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Controllers/ProductController.java</file>
+            <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Controllers/InputsAndOutputsController.java</file>
+            <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Models/InputsAndOutputsModels/HistoryViewModel.java</file>
             <file>file:/D:/MIS%20PROYECROS/PROYECTOS%20JAVA/CRUD_MiNegocio/src/Vews/SubtractProduct.java</file>
         </group>
     </open-files>

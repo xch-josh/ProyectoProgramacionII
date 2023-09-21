@@ -54,6 +54,7 @@ public class ProductView extends javax.swing.JFrame {
         labelImage = new javax.swing.JLabel();
         btnReport = new javax.swing.JButton();
         btnOut = new javax.swing.JButton();
+        btnInput = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -123,7 +124,7 @@ public class ProductView extends javax.swing.JFrame {
 
         btnOut.setBackground(new java.awt.Color(51, 51, 51));
         btnOut.setForeground(new java.awt.Color(255, 255, 255));
-        btnOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconmonstr-arrow-20-24.png"))); // NOI18N
+        btnOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/outputW24.png"))); // NOI18N
         btnOut.setText("Salida"); // NOI18N
         btnOut.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btnOut.setName("btnDelete"); // NOI18N
@@ -131,6 +132,19 @@ public class ProductView extends javax.swing.JFrame {
         btnOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOutActionPerformed(evt);
+            }
+        });
+
+        btnInput.setBackground(new java.awt.Color(51, 51, 51));
+        btnInput.setForeground(new java.awt.Color(255, 255, 255));
+        btnInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/inputW24.png"))); // NOI18N
+        btnInput.setText("Entrada"); // NOI18N
+        btnInput.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnInput.setName("btnDelete"); // NOI18N
+        btnInput.setPreferredSize(new Dimension(125,40));
+        btnInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInputActionPerformed(evt);
             }
         });
 
@@ -147,21 +161,25 @@ public class ProductView extends javax.swing.JFrame {
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(28, 28, 28)
                 .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOut, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnInput, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(labelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -352,6 +370,15 @@ public class ProductView extends javax.swing.JFrame {
 		subtractProduct.setVisible(true);
 	}
     }//GEN-LAST:event_btnOutActionPerformed
+
+    private void btnInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputActionPerformed
+        if (tProducts.getSelectedRow() >= 0){
+		SubtractProduct subtractProduct = new SubtractProduct(tProducts.getModel().getValueAt(tProducts.getSelectedRow(), 0).toString());
+		subtractProduct.productView = this;
+		subtractProduct.lblProduct.setText(tProducts.getModel().getValueAt(tProducts.getSelectedRow(), 1).toString());
+		subtractProduct.setVisible(true);
+	}
+    }//GEN-LAST:event_btnInputActionPerformed
 	
 	
 
@@ -388,6 +415,7 @@ public class ProductView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnInput;
     private javax.swing.JButton btnOut;
     private javax.swing.JButton btnReport;
     private javax.swing.JButton jButton6;
